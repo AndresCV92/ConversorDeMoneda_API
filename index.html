@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Moneda Local en Chile</title>
+</head>
+<body>
+    <h1>Conversor de Monedas Nacional</h1>
+    
+    <div>
+        <p>Pesos CLP</p> 
+        <input placeholder="Ingrese el monto en CLP" type="number" id="monto" min="1" step="1" value="">
+    </div>
+    
+    <div>
+        <p>Moneda a convertir:</p>
+        <select id="cambio">
+            <option value="dolar">Dolar</option>
+            <option value="euro">Euro</option> 
+            <option value="uf">Unidad de Fomento</option>
+        </select>
+    </div>
+    
+    <button id="convertir">Convertir</button>
+    
+    <span  id="resultado"></span>
+
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>
