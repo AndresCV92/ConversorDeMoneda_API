@@ -40,15 +40,15 @@ body {
 
 .grafico #resultado {
     display: block;
-    margin-bottom: 10px; /* Espacio inferior para separar del gráfico */
+    margin-bottom: 10px; /
 }
 
 .grafico canvas {
     max-width: 100%; 
-    background-color: transparent; /* Fondo transparente */
+    background-color: transparent;
 }
 
-/* Estilos adicionales */
+
 button {
     padding: 10px 20px;
     font-size: 16px;
@@ -63,9 +63,9 @@ button:hover {
     background-color: #0056b3;
 }
 
-/* Media query para pantallas pequeñas */
+
 @media (max-width: 768px) {
     .container {
-        padding: 0 20px; /* Agregar un pequeño padding a los lados en pantallas pequeñas */
+        padding: 0 20px; 
     }
 }
