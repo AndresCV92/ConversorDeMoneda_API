@@ -4,31 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conversor de Moneda Local en Chile</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
-    <h1>Conversor de Monedas Nacional</h1>
-    
-    <div>
-        <p>Pesos CLP</p> 
-        <input placeholder="Ingrese el monto en CLP" type="number" id="monto" min="1" step="1" value="">
+
+    <div class="conversor" >
+
     </div>
     
-    <div>
-        <p>Moneda a convertir:</p>
+    <div class="container">
+        <h1>Conversor de Moneda</h1>
+        
+        <input placeholder="Ingrese el monto en CLP" type="number" id="monto" min="1" step="1" value="">
+        
         <select id="cambio">
             <option value="dolar">Dolar</option>
             <option value="euro">Euro</option> 
             <option value="uf">Unidad de Fomento</option>
         </select>
+        <button id="convertir">Convertir</button>
+        <div class="grafico" >
+            <span  id="resultado"></span>
+            <canvas id="myChart"></canvas>
+        </div>
     </div>
     
-    <button id="convertir">Convertir</button>
     
-    <span  id="resultado"></span>
-
-    <div>
-        <canvas id="myChart"></canvas>
-    </div>
+    
+    
 
 
     

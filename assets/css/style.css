@@ -1,0 +1,71 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #6fb9ca77; 
+    background-image: url(https://cptstatic.s3.amazonaws.com/imagens/enviadas/materias/materia28914/acoes-bolsa-de-valores-afe.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: Arial, sans-serif; 
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center; 
+    margin-bottom: 20px; 
+    border: 1px solid rgba(82, 82, 91, 0.282);
+    background-color: rgba(174, 174, 151, 0.878);
+    border-radius: 7px;
+}
+
+.container h1 {
+    margin-bottom: 10px; 
+}
+
+.container input, 
+.container select {
+    margin-bottom: 10px;
+    width: 50%;
+    
+}
+
+.grafico {
+    text-align: center; 
+}
+
+.grafico #resultado {
+    display: block;
+    margin-bottom: 10px; /* Espacio inferior para separar del gráfico */
+}
+
+.grafico canvas {
+    max-width: 100%; 
+    background-color: transparent; /* Fondo transparente */
+}
+
+/* Estilos adicionales */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 20px; /* Agregar un pequeño padding a los lados en pantallas pequeñas */
+    }
+}

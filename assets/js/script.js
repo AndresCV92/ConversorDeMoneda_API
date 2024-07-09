@@ -1,31 +1,41 @@
-// Obtener referencia al botón y vincular el evento click
+
 const botonConvertir = document.getElementById('convertir');
 botonConvertir.addEventListener('click', convertir);
 
-// Función para convertir la moneda
+
+let myChart = null;
+
+
 async function convertir() {
     const monto = document.getElementById('monto').value;
     const cambio = document.getElementById('cambio').value;
 
     try {
-        // Obtener las tasas de cambio utilizando la API de mindicador.cl
+        
         const api = `https://mindicador.cl/api/${cambio}`;
         const response = await fetch(api);
         const data = await response.json();
 
-        // Verificar si la moneda seleccionada es válida y obtener la tasa de cambio
+       
         if (data.serie && data.serie.length > 0) {
             const tasa = data.serie[0].valor; 
             const conversion = monto / tasa; 
 
-            // Mostrar el resultado de la conversión
+            
             const resultado = document.getElementById('resultado');
             resultado.innerHTML = `
                 <p>${monto} CLP equivale a aproximadamente ${conversion.toFixed(2)} ${cambio}</p>
             `;
 
-            // Llamar a la función para crear el gráfico
-            await crearGrafico(data.serie);
+            
+            const hoy = new Date();
+            const ultimos20Dias = data.serie.filter(serie => {
+                const fechaSerie = new Date(serie.fecha);
+                return fechaSerie >= new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate() - 20);
+            });
+
+            // Actualizar el gráfico
+            await crearOActualizarGrafico(ultimos20Dias);
         } else {
             throw new Error("La moneda seleccionada no es válida o no se encontraron datos.");
         }
@@ -38,29 +48,47 @@ async function convertir() {
     }
 }
 
-// Función para crear el gráfico utilizando Chart.js
-async function crearGrafico(series) {
+
+async function crearOActualizarGrafico(series) {
     try {
         const data = series.map(serie => serie.valor);
-        const fechas = series.map(serie => serie.fecha);
+        const fechas = series.map(serie => {
+            const date = new Date(serie.fecha);
+            return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+        });
+
+        
         const ctx = document.getElementById('myChart').getContext('2d');
 
-        // Crear el gráfico
-        new Chart(ctx, {
+        
+        if (myChart) {
+            myChart.destroy();
+        }
+
+        
+        myChart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: fechas,
                 datasets: [{
                     label: 'Valor',
                     data: data,
-                    borderColor: 'rgba(75, 192, 192, 1)', // Color de la línea
+                    borderColor: 'rgba(75, 192, 192, 1)', 
                     borderWidth: 1
                 }]
             },
             options: {
                 scales: {
+                    x: {
+                        ticks: {
+                            autoSkip: true,
+                            maxTicksLimit: 20 
+                        }
+                    },
                     y: {
-                        beginAtZero: true
+                        beginAtZero: false, 
+                        suggestedMin: Math.min(...data) - 10, 
+                        suggestedMax: Math.max(...data) + 10 
                     }
                 }
             }
